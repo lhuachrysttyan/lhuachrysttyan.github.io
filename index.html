@@ -1,11 +1,143 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Em Breve...</title>
+    <style>
+        /* --- CSS --- */
+        
+        /* Redefinição básica para garantir que ocupe a tela toda */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body, html {
+            height: 100%;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow: hidden; /* Impede barras de rolagem */
+        }
+
+        /* O segredo do fundo animado: Gradiente que se move */
+        .background {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            width: 100%;
+            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+            background-size: 400% 400%; /* Gradiente maior que a tela */
+            animation: gradientAnimation 15s ease infinite; /* Animação infinita */
+            color: white;
+            text-align: center;
+        }
+
+        /* Estilo do container de texto */
+        .content {
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.2); /* Fundo sutil atrás do texto */
+            border-radius: 15px;
+            backdrop-filter: blur(5px); /* Efeito de vidro desfocado */
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Estilo do texto principal */
+        h1 {
+            font-size: 4rem;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            margin-bottom: 10px;
+            display: inline-block;
+            position: relative;
+        }
+
+        /* Efeito de digitação (Cursor piscando) */
+        h1::after {
+            content: '|';
+            position: absolute;
+            right: -15px;
+            animation: cursorBlink 0.7s infinite;
+        }
+
+        /* Subtítulo sutil */
+        p {
+            font-size: 1.2rem;
+            opacity: 0.8;
+            margin-top: 15px;
+        }
+
+        /* --- ANIMAÇÕES CSS --- */
+
+        /* Animação que move o fundo gradiente */
+        @keyframes gradientAnimation {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        /* Animação que faz o cursor piscar */
+        @keyframes cursorBlink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        /* Responsividade para telas menores */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+                letter-spacing: 2px;
+            }
+            p {
+                font-size: 1rem;
+            }
+        }
+    </style>
 </head>
 <body>
-    <h1>Miha Página no GitHub Pages</h1>
+
+    <div class="background">
+        <div class="content">
+            <h1 id="typing-text"></h1>
+            <p>Estamos preparando algo incrível para você.</p>
+        </div>
+    </div>
+
+    <script>
+        // --- JavaScript ---
+
+        const textElement = document.getElementById('typing-text');
+        const textToType = "SITE EM BREVE...";
+        let index = 0;
+
+        // Função que cria o efeito de digitação
+        function typeWriter() {
+            if (index < textToType.length) {
+                // Adiciona uma letra por vez
+                textElement.innerHTML += textToType.charAt(index);
+                index++;
+                // Define o tempo de espera entre cada letra (em milissegundos)
+                setTimeout(typeWriter, 150); 
+            } else {
+                // Opcional: Reiniciar a animação após um tempo
+                // setTimeout(() => {
+                //     textElement.innerHTML = "";
+                //     index = 0;
+                //     typeWriter();
+                // }, 3000); // Espera 3 segundos antes de reiniciar
+            }
+        }
+
+        // Inicia a função assim que a página carrega
+        window.onload = typeWriter;
+
+    </script>
 </body>
 </html>
